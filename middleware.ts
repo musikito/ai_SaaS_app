@@ -11,24 +11,25 @@
 
 
 // ** This version is deprecated **
-// import { authMiddleware } from "@clerk/nextjs/server";
+import { authMiddleware } from "@clerk/nextjs/server";
  
-// export default authMiddleware({
-//   publicRoutes: ['/', '/api/webhooks/clerk', '/api/webhooks/stripe']
-// });
+export default authMiddleware({
+  publicRoutes: ['/'],
+  ignoredRoutes: ["/api/webhooks/clerk"],
+});
  
-// export const config = {
-//   matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
-// };
-
-import { clerkMiddleware } from '@clerk/nextjs/server';
-
-// Make sure that the `/api/webhooks/(.*)` route is not protected here
-export default clerkMiddleware()
-
 export const config = {
-  matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
+  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
 };
+
+// import { clerkMiddleware } from '@clerk/nextjs/server';
+
+// // Make sure that the `/api/webhooks/(.*)` route is not protected here
+// export default clerkMiddleware()
+
+// export const config = {
+//   matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
+// };
 
 
 // ** This was an updated version provided by ChatGPT to get publicRoutes working with clerkMiddleware **
